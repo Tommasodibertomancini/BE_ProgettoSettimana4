@@ -11,12 +11,14 @@ public class VerbaliController : Controller
     private readonly IVerbaleService _verbaleService;
     private readonly IAnagraficaService _anagraficaService;
     private readonly IViolazioneService _violazioneService;
+    
 
     public VerbaliController(IVerbaleService verbaleService, IAnagraficaService anagraficaService, IViolazioneService violazioneService)
     {
         _verbaleService = verbaleService;
         _anagraficaService = anagraficaService;
         _violazioneService = violazioneService;
+      
     }
 
     public IActionResult Index()
@@ -39,12 +41,13 @@ public class VerbaliController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Verbale verbale)
+    public async Task<IActionResult> Create(Verbale verbale)
     {
         if (ModelState.IsValid)
         {
             verbale.Idverbale = Guid.NewGuid(); 
             _verbaleService.Add(verbale);
+
             return RedirectToAction(nameof(Index));
         }
 

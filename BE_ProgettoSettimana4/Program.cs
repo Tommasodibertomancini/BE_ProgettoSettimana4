@@ -1,5 +1,6 @@
 using BE_ProgettoSettimana4.Data;
 using BE_ProgettoSettimana4.Services;
+using FluentEmail.MailKitSmtp;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
