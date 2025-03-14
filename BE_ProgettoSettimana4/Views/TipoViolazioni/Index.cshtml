@@ -1,0 +1,21 @@
+﻿@{
+    var violazioni = ViewBag.Violazioni as IEnumerable<TipoViolazione>;
+}
+
+<h1>Violazioni</h1>
+<a class="btn btn-primary" asp-controller="TipoViolazioni" asp-action="Create">Aggiungi Violazione</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descrizione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var violazione in violazioni)
+        {
+                <tr>
+                    <td>@violazione.Descrizione</td>
+                </tr>
+        }
+    </tbody>
+</table>

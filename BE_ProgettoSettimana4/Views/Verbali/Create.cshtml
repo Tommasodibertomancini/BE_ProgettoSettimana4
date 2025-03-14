@@ -1,0 +1,38 @@
+﻿@model Verbale
+
+<h1>Crea Verbale</h1>
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Idanagrafica">Trasgressore</label>
+        <select asp-for="Idanagrafica" class="form-control" asp-items="ViewBag.Anagrafiche"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Idviolazione">Violazione</label>
+        <select asp-for="Idviolazione" class="form-control" asp-items="ViewBag.TipoViolazioni"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataViolazione"></label>
+        <input asp-for="DataViolazione" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IndirizzoViolazione"></label>
+        <input asp-for="IndirizzoViolazione" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="NominativoAgente"></label>
+        <input asp-for="NominativoAgente" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DataTrascrizioneVerbale"></label>
+        <input asp-for="DataTrascrizioneVerbale" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Importo"></label>
+        <input asp-for="Importo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DecurtamentoPunti"></label>
+        <input asp-for="DecurtamentoPunti" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Salva</button>
+</form>

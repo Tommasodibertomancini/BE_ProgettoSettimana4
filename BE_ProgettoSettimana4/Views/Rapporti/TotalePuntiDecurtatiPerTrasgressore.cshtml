@@ -1,0 +1,24 @@
+﻿@{
+    var report = ViewBag.Report as IEnumerable<dynamic>;
+}
+
+<h1>@ViewBag.Titolo</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Totale Punti Decurtati</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in report)
+        {
+            <tr>
+                <td>@item.Trasgressore.Cognome</td>
+                <td>@item.Trasgressore.Nome</td>
+                <td>@item.TotalePunti</td>
+            </tr>
+        }
+    </tbody>
+</table>

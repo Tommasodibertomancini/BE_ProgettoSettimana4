@@ -1,0 +1,10 @@
+﻿@model TipoViolazione
+
+<h1>Aggiungi Violazione</h1>
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Descrizione"></label>
+        <input asp-for="Descrizione" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Salva</button>
+</form>
