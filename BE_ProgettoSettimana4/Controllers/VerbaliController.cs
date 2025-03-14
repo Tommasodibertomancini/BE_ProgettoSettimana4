@@ -1,5 +1,7 @@
 ﻿using BE_ProgettoSettimana4.Data;
+using BE_ProgettoSettimana4.Models;
 using BE_ProgettoSettimana4.Services;
+using BE_ProgettoSettimana4.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
@@ -19,16 +21,21 @@ public class VerbaliController : Controller
 
     public IActionResult Index()
     {
-        var verbali = _verbaleService.GetAll();
-        ViewBag.Verbali = verbali;
-        return View();
+        var viewModel = new VerbaliViewModel
+        {
+            Verbali = _verbaleService.GetAll().ToList()
+        };
+        return View(viewModel);
     }
 
     public IActionResult Create()
     {
-        ViewBag.Anagrafiche = new SelectList(_anagraficaService.GetAll(), "Idanagrafica", "Cognome");
-        ViewBag.TipoViolazioni = new SelectList(_violazioneService.GetAll(), "Idviolazione", "Descrizione");
-        return View();
+        var viewModel = new VerbaliViewModel
+        {
+            Anagrafiche = new SelectList(_anagraficaService.GetAll(), "Idanagrafica", "Cognome"),
+            TipoViolazioni = new SelectList(_violazioneService.GetAll(), "Idviolazione", "Descrizione")
+        };
+        return View(viewModel);
     }
 
     [HttpPost]
@@ -36,12 +43,17 @@ public class VerbaliController : Controller
     {
         if (ModelState.IsValid)
         {
-            verbale.Idverbale = Guid.NewGuid();
+            verbale.Idverbale = Guid.NewGuid(); 
             _verbaleService.Add(verbale);
             return RedirectToAction(nameof(Index));
         }
-        ViewBag.Anagrafiche = new SelectList(_anagraficaService.GetAll(), "Idanagrafica", "Cognome", verbale.Idanagrafica);
-        ViewBag.TipoViolazioni = new SelectList(_violazioneService.GetAll(), "Idviolazione", "Descrizione", verbale.Idviolazione);
-        return View(verbale);
+
+        var viewModel = new VerbaliViewModel
+        {
+            Verbale = verbale,
+            Anagrafiche = new SelectList(_anagraficaService.GetAll(), "Idanagrafica", "Cognome", verbale.Idanagrafica),
+            TipoViolazioni = new SelectList(_violazioneService.GetAll(), "Idviolazione", "Descrizione", verbale.Idviolazione)
+        };
+        return View(viewModel);
     }
 }

@@ -6,7 +6,7 @@ namespace BE_ProgettoSettimana4.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Riepilogo()
+        public IActionResult Index()
         {
             return View();
         }

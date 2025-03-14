@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Riepilogo Rapporti";
+}
+
+<div class="container mt-4">
+    <h1 class="my-3">Riepilogo Rapporti</h1>
+    <ul class="list-group">
+        <li class="list-group-item mb-2">
+            <a href="@Url.Action("TotaleVerbaliPerTrasgressore", "Rapporti")">Totale Verbali per Trasgressore</a>
+        </li>
+        <li class="list-group-item mb-2">
+            <a href="@Url.Action("TotalePuntiDecurtatiPerTrasgressore", "Rapporti")">Totale Punti Decurtati per Trasgressore</a>
+        </li>
+        <li class="list-group-item mb-2">
+            <a href="@Url.Action("ViolazioniSuperioriA10Punti", "Rapporti")">Violazioni con Decurtamento Punti > 10</a>
+        </li>
+        <li class="list-group-item mb-2">
+            <a href="@Url.Action("ViolazioniCostose", "Rapporti")">Violazioni con Importo > 400 Euro</a>
+        </li>
+        <li class="list-group-item mb-2">
+            <a href="@Url.Action("ViolazioniContestabili", "Rapporti")">Violazioni Contestabili</a>
+        </li>
+    </ul>
+</div>

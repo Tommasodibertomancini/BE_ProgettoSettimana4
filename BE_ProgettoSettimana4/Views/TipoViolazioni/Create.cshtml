@@ -1,10 +1,10 @@
-﻿@model TipoViolazione
+﻿@model BE_ProgettoSettimana4.Models.TipoViolazione
 
-<h1>Aggiungi Violazione</h1>
+<h1 class="my-3">Crea Violazione</h1>
 <form asp-action="Create">
-    <div class="form-group">
+    <div class="form-group mb-2">
         <label asp-for="Descrizione"></label>
         <input asp-for="Descrizione" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Salva</button>
+    <button type="submit" class="btn btn-primary mb-2">Salva</button>
 </form>

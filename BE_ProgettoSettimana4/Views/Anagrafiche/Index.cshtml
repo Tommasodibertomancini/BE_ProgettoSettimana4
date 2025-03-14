@@ -1,8 +1,6 @@
-﻿@{
-    var anagrafiche = ViewBag.Anagrafiche as IEnumerable<Anagrafica>;
-}
+﻿@model BE_ProgettoSettimana4.ViewModels.AnagraficheViewModel
 
-<h1>Trasgressori</h1>
+<h1 class="my-3">Trasgressori</h1>
 <a class="btn btn-primary" asp-controller="Anagrafiche" asp-action="Create">Aggiungi Trasgressore</a>
 <table class="table">
     <thead>
@@ -16,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var anagrafica in anagrafiche)
+        @foreach (var anagrafica in Model.Anagrafiche)
         {
             <tr>
                 <td>@anagrafica.Cognome</td>

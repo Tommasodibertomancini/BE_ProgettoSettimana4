@@ -1,5 +1,7 @@
 ﻿using BE_ProgettoSettimana4.Data;
+using BE_ProgettoSettimana4.Models;
 using BE_ProgettoSettimana4.Services;
+using BE_ProgettoSettimana4.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -14,9 +16,11 @@ public class TipoViolazioniController : Controller
 
     public IActionResult Index()
     {
-        var violazioni = _violazioneService.GetAll();
-        ViewBag.Violazioni = violazioni;
-        return View();
+        var viewModel = new TipoViolazioniViewModel
+        {
+            Violazioni = _violazioneService.GetAll().ToList()
+        };
+        return View(viewModel);
     }
 
     public IActionResult Create()
@@ -29,7 +33,7 @@ public class TipoViolazioniController : Controller
     {
         if (ModelState.IsValid)
         {
-            violazione.Idviolazione = Guid.NewGuid();
+            violazione.Idviolazione = Guid.NewGuid(); 
             _violazioneService.Add(violazione);
             return RedirectToAction(nameof(Index));
         }

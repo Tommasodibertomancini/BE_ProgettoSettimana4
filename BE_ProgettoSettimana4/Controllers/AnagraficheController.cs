@@ -1,5 +1,7 @@
 ﻿using BE_ProgettoSettimana4.Data;
+using BE_ProgettoSettimana4.Models;
 using BE_ProgettoSettimana4.Services;
+using BE_ProgettoSettimana4.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -14,9 +16,11 @@ public class AnagraficheController : Controller
 
     public IActionResult Index()
     {
-        var anagrafiche = _anagraficaService.GetAll();
-        ViewBag.Anagrafiche = anagrafiche;
-        return View();
+        var viewModel = new AnagraficheViewModel
+        {
+            Anagrafiche = _anagraficaService.GetAll().ToList()
+        };
+        return View(viewModel);
     }
 
     public IActionResult Create()
@@ -29,7 +33,7 @@ public class AnagraficheController : Controller
     {
         if (ModelState.IsValid)
         {
-            anagrafica.Idanagrafica = Guid.NewGuid();
+            anagrafica.Idanagrafica = Guid.NewGuid(); 
             _anagraficaService.Add(anagrafica);
             return RedirectToAction(nameof(Index));
         }

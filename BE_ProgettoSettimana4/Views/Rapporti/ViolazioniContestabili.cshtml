@@ -1,8 +1,6 @@
-﻿@{
-    var contestabili = ViewBag.Contestabili as IEnumerable<dynamic>;
-}
+﻿@model BE_ProgettoSettimana4.ViewModels.RapportoViewModel
 
-<h1>@ViewBag.Titolo</h1>
+<h1 class="my-3">@Model.Titolo</h1>
 <table class="table">
     <thead>
         <tr>
@@ -15,7 +13,10 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in contestabili)
+
+        @if(Model.Report != null && Model.Report.Count >0)
+{
+        @foreach (var item in Model.Report)
         {
             <tr>
                 <td>@item.Importo</td>
@@ -26,5 +27,6 @@
                 <td>@item.Descrizione</td>
             </tr>
         }
+}
     </tbody>
 </table>

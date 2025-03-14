@@ -1,8 +1,6 @@
-﻿@{
-    var verbali = ViewBag.Verbali as IEnumerable<Verbale>;
-}
+﻿@model BE_ProgettoSettimana4.ViewModels.VerbaliViewModel
 
-<h1>Verbali</h1>
+<h1 class="my-3">Verbali</h1>
 <a class="btn btn-primary" asp-controller="Verbali" asp-action="Create">Crea Verbale</a>
 <table class="table">
     <thead>
@@ -16,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var verbale in verbali)
+        @foreach (var verbale in Model.Verbali)
         {
             <tr>
                 <td>@verbale.Anagrafica.Cognome @verbale.Anagrafica.Nome</td>

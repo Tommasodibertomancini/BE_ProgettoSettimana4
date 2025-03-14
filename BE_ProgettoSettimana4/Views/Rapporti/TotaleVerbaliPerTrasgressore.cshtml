@@ -1,8 +1,6 @@
-﻿@{
-    var report = ViewBag.Report as IEnumerable<dynamic>;
-}
+﻿@model BE_ProgettoSettimana4.ViewModels.RapportoViewModel
 
-<h1>@ViewBag.Titolo</h1>
+<h1 class="my-3">@Model.Titolo</h1>
 <table class="table">
     <thead>
         <tr>
@@ -12,13 +10,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in report)
+        @foreach (var item in Model.Report)
         {
-                <tr>
-                    <td>@item.Trasgressore.Cognome</td>
-                    <td>@item.Trasgressore.Nome</td>
-                    <td>@item.TotaleVerbali</td>
-                </tr>
+            <tr>
+                <td>@item.Trasgressore.Cognome</td>
+                <td>@item.Trasgressore.Nome</td>
+                <td>@item.TotaleVerbali</td>
+            </tr>
         }
     </tbody>
 </table>

@@ -3,6 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
+using BE_ProgettoSettimana4.ViewModels;
+using BE_ProgettoSettimana4.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
 public class RapportiController : Controller
 {
     private readonly GestioneSanzioniDbContext _context;
@@ -11,32 +17,58 @@ public class RapportiController : Controller
     {
         _context = context;
     }
+    public IActionResult Index()
+    {
+        return View();
+    }
 
     public IActionResult TotaleVerbaliPerTrasgressore()
     {
         var report = _context.Verbali
             .Include(v => v.Anagrafica)
             .GroupBy(v => v.Anagrafica)
-            .Select(g => new { Trasgressore = g.Key, TotaleVerbali = g.Count() })
+            .Select(g => new
+            {
+                Trasgressore = g.Key,
+                TotaleVerbali = g.Count()
+            })
+            .ToList()
+            .Select(item => (dynamic)item)
             .ToList();
 
-        ViewBag.Report = report;
-        ViewBag.Titolo = "Totale Verbali per Trasgressore";
-        return View();
+        var viewModel = new RapportoViewModel
+        {
+            Titolo = "Totale Verbali per Trasgressore",
+            Report = report
+        };
+
+        return View(viewModel);
     }
+
 
     public IActionResult TotalePuntiDecurtatiPerTrasgressore()
     {
         var report = _context.Verbali
             .Include(v => v.Anagrafica)
             .GroupBy(v => v.Anagrafica)
-            .Select(g => new { Trasgressore = g.Key, TotalePunti = g.Sum(v => v.DecurtamentoPunti) })
+            .Select(g => new
+            {
+                Trasgressore = g.Key,
+                TotalePunti = g.Sum(v => v.DecurtamentoPunti)
+            })
+            .ToList()
+            .Select(item => (dynamic)item)
             .ToList();
 
-        ViewBag.Report = report;
-        ViewBag.Titolo = "Totale Punti Decurtati per Trasgressore";
-        return View();
+        var viewModel = new RapportoViewModel
+        {
+            Titolo = "Totale Punti Decurtati per Trasgressore",
+            Report = report
+        };
+
+        return View(viewModel);
     }
+
 
     public IActionResult ViolazioniSuperioriA10Punti()
     {
@@ -51,12 +83,19 @@ public class RapportiController : Controller
                 v.DataViolazione,
                 v.DecurtamentoPunti
             })
+            .ToList()
+            .Select(item => (dynamic)item)
             .ToList();
 
-        ViewBag.Report = report;
-        ViewBag.Titolo = "Violazioni con Decurtamento Punti > 10";
-        return View();
+        var viewModel = new RapportoViewModel
+        {
+            Titolo = "Violazioni con Decurtamento Punti > 10",
+            Report = report
+        };
+
+        return View(viewModel);
     }
+
 
     public IActionResult ViolazioniCostose()
     {
@@ -71,12 +110,19 @@ public class RapportiController : Controller
                 v.DataViolazione,
                 v.DecurtamentoPunti
             })
+            .ToList()
+            .Select(item => (dynamic)item)
             .ToList();
 
-        ViewBag.Report = report;
-        ViewBag.Titolo = "Violazioni con Importo > 400 Euro";
-        return View();
+        var viewModel = new RapportoViewModel
+        {
+            Titolo = "Violazioni con Importo > 400 Euro",
+            Report = report
+        };
+
+        return View(viewModel);
     }
+
 
     public IActionResult ViolazioniContestabili()
     {
@@ -93,11 +139,17 @@ public class RapportiController : Controller
                 v.DecurtamentoPunti,
                 v.TipoViolazione.Descrizione
             })
+            .ToList()
+            .Select(item => (dynamic)item)
             .ToList();
 
-        ViewBag.Titolo = "Violazioni Contestabili";
-        ViewBag.Contestabili = contestabili;
+        var viewModel = new RapportoViewModel
+        {
+            Titolo = "Violazioni Contestabili",
+            Report = contestabili
+        };
 
-        return View();
+        return View(viewModel);
     }
+
 }

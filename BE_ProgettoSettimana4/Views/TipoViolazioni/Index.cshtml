@@ -1,8 +1,6 @@
-﻿@{
-    var violazioni = ViewBag.Violazioni as IEnumerable<TipoViolazione>;
-}
+﻿@model BE_ProgettoSettimana4.ViewModels.TipoViolazioniViewModel
 
-<h1>Violazioni</h1>
+<h1 class="my-3">Violazioni</h1>
 <a class="btn btn-primary" asp-controller="TipoViolazioni" asp-action="Create">Aggiungi Violazione</a>
 <table class="table">
     <thead>
@@ -11,11 +9,11 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var violazione in violazioni)
+        @foreach (var violazione in Model.Violazioni)
         {
-                <tr>
-                    <td>@violazione.Descrizione</td>
-                </tr>
+            <tr>
+                <td>@violazione.Descrizione</td>
+            </tr>
         }
     </tbody>
 </table>
